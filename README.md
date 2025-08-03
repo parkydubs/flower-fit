@@ -1,1 +1,1 @@
-# hackathon-katy-youth
+# making FlowerFit website for Katy Youth Hackathon
