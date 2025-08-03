@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>FlowerFit: Flowers for Your Climate & Colors</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body { font-family: system-ui,-apple-system,BlinkMacSystemFont,sans-serif; max-width: 900px; margin: auto; padding: 1.5rem; line-height:1.4; }
+    h1 { margin-bottom: .2rem; }
+    .card { border:1px solid #ddd; border-radius:8px; padding:1rem; margin-bottom:1rem; box-shadow:0 4px 12px rgba(0,0,0,0.05);}
+    .palette { display:flex; gap:4px; margin-top:6px; }
+    .swatch { flex:1; height:40px; border-radius:4px; }
+    .flower-list { list-style: none; padding:0; }
+    .tag { background:#eef; padding:4px 8px; border-radius:12px; margin-right:4px; display:inline-block; font-size:.75rem; }
+    button { padding:8px 14px; border:none; border-radius:6px; cursor:pointer; background:#2563eb; color:white; }
+    .small { font-size:.85rem; color:#555; }
+  </style>
+</head>
+<body>
+  <h1>🌸 FlowerFit</h1>
+  <p>Help me pick flowers that will thrive where I live and look good together.</p>
+
+  <div class="card" id="location-block">
+    <h2>1. Your Location / Climate Zone</h2>
+    <p><button id="detect-btn">Use My Location</button> or enter ZIP: 
+      <input id="zip" placeholder="e.g. 90210" style="width:100px" />
+      <button id="lookup-zip">Lookup</button>
+    </p>
+    <p id="zone-info">Zone: <em>unknown</em></p>
+    <p class="small">Hardiness zones help determine plants that survive winter lows. <a href="https://planthardiness.ars.usda.gov/" target="_blank">See USDA map</a>. </p>
+  </div>
+
+  <div class="card" id="flowers-block" style="display:none;">
+    <h2>2. Recommended Flowers</h2>
+    <p>Based on your zone, these are good picks:</p>
+    <ul class="flower-list" id="flower-list"></ul>
+  </div>
+
+  <div class="card" id="colors-block" style="display:none;">
+    <h2>3. Color Scheme Suggestions</h2>
+    <p>Pick a style:</p>
+    <div>
+      <div>
+        <strong>Complementary</strong>
+        <div class="palette" id="comp-palette">
+          <!-- swatches inserted -->
+        </div>
+      </div>
+      <div>
+        <strong>Analogous</strong>
+        <div class="palette" id="analog-palette"></div>
+      </div>
+      <div>
+        <strong>60-30-10 (Dominant / Secondary / Accent)</strong>
+        <div class="palette" id="rule-palette"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>How It Works (for Demo / Judges)</h2>
+    <ul>
+      <li>Geolocate or ZIP → infer USDA hardiness zone. :contentReference[oaicite:5]{index=5}</li>
+      <li>Lookup curated flower list per zone (you can extend with API or dataset later).</li>
+      <li>Generate a garden color palette using basic color theory (complementary, analogous, 60-30-10). :contentReference[oaicite:6]{index=6}</li>
+    </ul>
+  </div>
+
+  <script>
+    // wimple demo data: maps few ZIP prefixes to zones, stub to replace with real lookup
+    const zipToZone = {
+      '902': '10b', // southern California
+      '100': '7b', // NYC
+      '606': '6a', // Chicago
+      '733': '8b', // Austin-ish
+    };
+    const zoneFlowers = {
+      '10b': [
+        { name: 'Lantana', color: 'pink/orange', notes: 'Heat tolerant' },
+        { name: 'Salvia', color: 'blue', notes: 'Attracts pollinators' }
+      ],
+      '7b': [
+        { name: 'Coneflower', color: 'purple', notes: 'Perennial, drought tolerant' },
+        { name: 'Daylily', color: 'yellow', notes: 'Low maintenance' }
+      ],
+      '6a': [
+        { name: 'Peony', color: 'pink/white', notes: 'Cold resistant' },
+        { name: 'Black-eyed Susan', color: 'gold', notes: 'Long bloom' }
+      ],
+      '8b': [
+        { name: 'Angelonia', color: 'lavender', notes: 'Summer bloom' },
+        { name: 'Snapdragon', color: 'mixed', notes: 'Full sun' }
+      ]
+    };
+
+    function showFlowers(zone) {
+      const list = document.getElementById('flower-list');
+      list.innerHTML = '';
+      const flowers = zoneFlowers[zone] || [];
+      if (!flowers.length) {
+        list.innerHTML = '<li>No sample data for this zone yet.</li>';
+      } else {
+        flowers.forEach(f => {
+          const li = document.createElement('li');
+          li.innerHTML = `<strong>${f.name}</strong> <span class="tag">${f.color}</span> — ${f.notes}`;
+          list.appendChild(li);
+        });
+      }
+      document.getElementById('flowers-block').style.display = 'block';
+    }
+
+    function setZone(zone) {
+      document.getElementById('zone-info').innerText = 'Zone: ' + zone;
+      // show placeholder flower recommendations
+      showFlowers(zone);
+      generatePalettes();
+      document.getElementById('colors-block').style.display = 'block';
+    }
+
+    document.getElementById('lookup-zip').onclick = () => {
+      const raw = document.getElementById('zip').value.trim();
+      const prefix = raw.slice(0, 3);
+      const zone = zipToZone[prefix] || 'unknown';
+      setZone(zone);
+    };
+
+    document.getElementById('detect-btn').onclick = () => {
+      if (!navigator.geolocation) {
+        alert('Geolocation unsupported');
+        return;
+      }
+      navigator.geolocation.getCurrentPosition(p => {
+        // for a real application: reverse-geocode coords to zip/zone through API, maybe google maps?
+        // running assumption, say zone 7b
+        setZone('7b');
+      }, () => alert('Permission denied'));
+    };
+
+    // color palette logic (very simplified demo)
+    function generatePalettes() {
+      // hardcodign a sample base hue and compute others
+      // in real: let user pick base flower color, to enhance PERSONAL PREFERENCE
+      const comp = ['#2b6cb0', '#e69f00']; // blue/orange
+      const analog = ['#2b6cb0', '#3b8cd1', '#1f54a0']; // blueish analogous
+      const rule = ['#2b6cb0', '#68a0d9', '#f2c14e']; // dominant, secondary, accent
+
+      const setSwatches = (id, arr) => {
+        const container = document.getElementById(id);
+        container.innerHTML = '';
+        arr.forEach(c => {
+          const d = document.createElement('div');
+          d.className = 'swatch';
+          d.style.background = c;
+          container.appendChild(d);
+        });
+      };
+      setSwatches('comp-palette', comp);
+      setSwatches('analog-palette', analog);
+      setSwatches('rule-palette', rule);
+    }
+  </script>
+</body>
+</html>
