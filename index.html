@@ -36,7 +36,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(255, 255, 255, 0.7); /* White overlay with 70% opacity */
+      background-color: rgba(255, 255, 255, 0.85); /* White overlay with 85% opacity */
       z-index: -1;
     }
     /*
@@ -55,8 +55,8 @@
     }
   </style>
 </head>
-<body class="bg-gray-50 flex items-center justify-center min-h-screen p-4">
-  <div class="max-w-4xl w-full mx-auto p-8 bg-white rounded-xl shadow-2xl space-y-8">
+<body class="bg-emerald-100 flex items-center justify-center min-h-screen p-4">
+  <div class="max-w-4xl w-full mx-auto p-8 bg-emerald-50 rounded-xl shadow-2xl space-y-8">
 
     <!-- Mission Statement Section -->
     <header class="text-center">
@@ -86,7 +86,7 @@
     </section>
 
     <!-- Location Block -->
-    <div class="card p-6 bg-white rounded-lg shadow-md">
+    <div class="card p-6 bg-emerald-50 rounded-lg shadow-md">
       <h2 class="text-2xl font-semibold text-gray-800">1. Your Location / Climate Zone</h2>
       <p class="mt-4 text-gray-600">
         <button id="detect-btn" class="bg-blue-600 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Use My Location</button>
@@ -100,7 +100,7 @@
     </div>
 
     <!-- Flowers Block -->
-    <div class="card p-6 bg-white rounded-lg shadow-md hidden" id="flowers-block">
+    <div class="card p-6 bg-emerald-50 rounded-lg shadow-md hidden" id="flowers-block">
       <h2 class="text-2xl font-semibold text-gray-800">2. Recommended Flowers</h2>
       <p class="mt-4 text-gray-600">Based on your zone, these are great sustainable picks:</p>
       <ul class="flower-list list-none p-0 mt-4 space-y-4" id="flower-list"></ul>
@@ -115,7 +115,7 @@
     </div>
 
     <!-- Color Schemes Block -->
-    <div class="card p-6 bg-white rounded-lg shadow-md hidden" id="colors-block">
+    <div class="card p-6 bg-emerald-50 rounded-lg shadow-md hidden" id="colors-block">
       <h2 class="text-2xl font-semibold text-gray-800">3. Color Scheme Suggestions</h2>
       <p class="mt-4 text-gray-600">Pick a style that fits your aesthetic:</p>
       <div class="grid md:grid-cols-3 gap-6 mt-6">
