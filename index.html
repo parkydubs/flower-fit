@@ -55,7 +55,7 @@
   </style>
 </head>
 <body class="bg-emerald-100 flex items-center justify-center min-h-screen p-4">
-  <div class="max-w-4xl w-full mx-auto p-8 bg-emerald-50 rounded-xl shadow-2xl space-y-8">
+  <div class="max-w-4xl w-full mx-auto p-8 bg-emerald-100 rounded-xl shadow-2xl space-y-8">
 
     <!-- TITLE + large text background (in front of image) -->
     <header class="text-center">
@@ -64,7 +64,7 @@
     </header>
 
     <!-- MISSION STATEMENT SECTION -->
-    <section class="bg-emerald-100 p-6 rounded-lg border-l-4 border-gray-600">
+    <section class="bg-emerald-150 p-6 rounded-lg border-l-4 border-gray-600">
       <h2 class="text-2xl font-bold text-gray-700">Mission</h2>
       <p class="mt-2 text-gray-700">
         In addition to enhancing aesthetics, this project aims to address critical environmental issues while also helping new gardeners make informed, sustainable choices. By suggesting plants suited to your local climate, we contribute to:
@@ -86,7 +86,7 @@
     </section>
 
     <!-- LOCATION SECTION -->
-    <div class="card p-6 bg-emerald-100 rounded-lg shadow-md">
+    <div class="card p-6 bg-emerald-150 rounded-lg shadow-md">
       <h2 class="text-2xl font-semibold text-gray-800">1. Your Location / Climate Zone</h2>
       <p class="mt-4 text-gray-600">
         <button id="detect-btn" class="bg-green-600 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">Use My Location</button>
@@ -100,7 +100,7 @@
     </div>
 
     <!-- FLOWERS SECTION -->
-    <div class="card p-6 bg-emerald-100 rounded-lg shadow-md hidden" id="flowers-block">
+    <div class="card p-6 bg-emerald-150 rounded-lg shadow-md hidden" id="flowers-block">
       <h2 class="text-2xl font-semibold text-gray-800">2. Recommended Flowers</h2>
       <p class="mt-4 text-gray-600">Based on your zone, these are great sustainable picks:</p>
       <ul class="flower-list list-none p-0 mt-4 space-y-4" id="flower-list"></ul>
@@ -115,7 +115,7 @@
     </div>
 
     <!-- COLOR SCHEME SECTION (maybe get rid of idk yet) -->
-    <div class="card p-6 bg-emerald-100 rounded-lg shadow-md hidden" id="colors-block">
+    <div class="card p-6 bg-emerald-150 rounded-lg shadow-md hidden" id="colors-block">
       <h2 class="text-2xl font-semibold text-gray-800">3. Color Scheme Suggestions</h2>
       <p class="mt-4 text-gray-600">Pick a style that fits your aesthetic:</p>
       <div class="grid md:grid-cols-3 gap-6 mt-6">
@@ -176,24 +176,32 @@
 
       const zoneFlowers = {
         '10b': [
-          { name: 'Lantana', color: 'pink/orange', notes: 'Heat tolerant', water: 'low', pollinator: true, native: false },
-          { name: 'California Poppy', color: 'orange', notes: 'Drought tolerant', water: 'low', pollinator: true, native: true },
-          { name: 'Salvia', color: 'blue', notes: 'Attracts pollinators', water: 'medium', pollinator: true, native: false }
+          { name: 'Sunflower', color: 'yellow', notes: 'Grows well in heat and full sun.', pollinator: true, native: false },
+          { name: 'Marigold', color: 'orange', notes: 'Deters pests and is very easy to grow.', pollinator: false, native: false },
+          { name: 'Geranium', color: 'red', notes: 'Popular for containers and flower beds.', pollinator: true, native: false },
+          { name: 'Hibiscus', color: 'pink/red', notes: 'Tropical flowers that thrive in full sun.', pollinator: true, native: false },
+          { name: 'Bougainvillea', color: 'magenta', notes: 'Vibrant vine that is drought and heat tolerant.', pollinator: true, native: false }
         ],
         '7b': [
-          { name: 'Coneflower', color: 'purple', notes: 'Perennial, drought tolerant', water: 'low', pollinator: true, native: true },
-          { name: 'Bee Balm', color: 'red/pink', notes: 'Attracts bees and hummingbirds', water: 'medium', pollinator: true, native: true },
-          { name: 'Daylily', color: 'yellow', notes: 'Low maintenance', water: 'low', pollinator: false, native: false }
+          { name: 'Tulip', color: 'mixed', notes: 'Classic spring flower, thrives in cooler climates.', pollinator: false, native: false },
+          { name: 'Lavender', color: 'purple', notes: 'Fragrant and attracts beneficial insects.', pollinator: true, native: false },
+          { name: 'Hostas', color: 'green', notes: 'Prefers shade and is easy to maintain.', pollinator: false, native: false },
+          { name: 'Dahlia', color: 'mixed', notes: 'Come in many shapes and colors. A late summer favorite.', pollinator: true, native: false },
+          { name: 'Petunia', color: 'mixed', notes: 'Common and vibrant bedding plant.', pollinator: true, native: false }
         ],
         '6a': [
-          { name: 'Peony', color: 'pink/white', notes: 'Cold resistant', water: 'medium', pollinator: false, native: false },
-          { name: 'Black-eyed Susan', color: 'gold', notes: 'Long bloom', water: 'low', pollinator: true, native: true },
-          { name: 'Aster', color: 'purple/white', notes: 'Late season food source for pollinators', water: 'medium', pollinator: true, native: true }
+          { name: 'Roses', color: 'mixed', notes: 'Classic flower that needs a bit of care.', pollinator: true, native: false },
+          { name: 'Hydrangea', color: 'blue/pink', notes: 'Large, showy blooms for cold climates.', pollinator: false, native: false },
+          { name: 'Lilac', color: 'purple', notes: 'Fragrant and low-maintenance shrub.', pollinator: true, native: false },
+          { name: 'Iris', color: 'mixed', notes: 'Elegant perennial with unique flower shapes.', pollinator: true, native: false },
+          { name: 'Daylily', color: 'yellow/orange', notes: 'Hardy and low-maintenance. Returns every year.', pollinator: false, native: false }
         ],
         '8b': [
-          { name: 'Angelonia', color: 'lavender', notes: 'Summer bloom', water: 'medium', pollinator: false, native: false },
-          { name: 'Yarrow', color: 'white/yellow', notes: 'Drought tolerant, attracts beneficial insects', water: 'low', pollinator: true, native: true },
-          { name: 'Snapdragon', color: 'mixed', notes: 'Full sun', water: 'medium', pollinator: false, native: false }
+          { name: 'Zinnia', color: 'mixed', notes: 'Attracts butterflies and blooms all summer.', pollinator: true, native: false },
+          { name: 'Daffodil', color: 'yellow/white', notes: 'Reliable spring flower that returns every year.', pollinator: false, native: false },
+          { name: 'Texas Bluebonnet', color: 'blue', notes: 'The state flower of Texas, a beautiful native annual.', pollinator: true, native: true },
+          { name: 'Crape Myrtle', color: 'pink/white/red', notes: 'A beautiful small tree or shrub with long-lasting blooms.', pollinator: true, native: false },
+          { name: 'Petunia', color: 'mixed', notes: 'Common and vibrant bedding plant.', pollinator: true, native: false }
         ]
       };
 
