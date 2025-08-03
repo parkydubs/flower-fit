@@ -60,43 +60,43 @@
 
     <!-- Mission Statement Section -->
     <header class="text-center">
-      <h1 class="text-5xl font-extrabold text-blue-800">FlowerFit 🌸</h1>
+      <h1 class="text-5xl font-extrabold text-gray-800">FlowerFit 🌸</h1>
       <p class="mt-2 text-xl text-gray-600">Cultivating Gardens, Sowing Social Good</p>
     </header>
 
-    <section class="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-500">
-      <h2 class="text-2xl font-bold text-blue-700">Our Mission for Social Good</h2>
+    <section class="bg-emerald-200 p-6 rounded-lg border-l-4 border-gray-600">
+      <h2 class="text-2xl font-bold text-gray-700">Our Mission for Social Good</h2>
       <p class="mt-2 text-gray-700">
         Our project aims to address critical environmental issues by helping gardeners make informed, sustainable choices. By suggesting plants suited to your local climate, we contribute to:
       </p>
       <ul class="list-disc list-inside mt-4 text-gray-700 space-y-2">
         <li>
-          <span class="font-semibold text-green-600">Protecting Pollinators:</span> We recommend pollinator-friendly flowers, helping to restore habitats for bees and butterflies.
+          <span class="font-semibold text-black">Protecting Pollinators:</span> We recommend pollinator-friendly flowers, helping to restore habitats for bees and butterflies.
         </li>
         <li>
-          <span class="font-semibold text-sky-600">Conserving Water:</span> We reduce water waste by promoting drought-resistant and climate-appropriate plants.
+          <span class="font-semibold text-black">Conserving Water:</span> We reduce water waste by promoting drought-resistant and climate-appropriate plants.
         </li>
         <li>
-          <span class="font-semibold text-gray-600">Reducing Garden Waste:</span> We increase planting success and reduce waste by guiding you to plants that thrive naturally in your area.
+          <span class="font-semibold text-black">Reducing Garden Waste:</span> We increase planting success and reduce waste by guiding you to plants that thrive naturally in your area.
         </li>
         <li>
-          <span class="font-semibold text-amber-600">Fostering Biodiversity:</span> We encourage the use of native species to support local ecosystems and biodiversity.
+          <span class="font-semibold text-black">Fostering Biodiversity:</span> We encourage the use of native species to support local ecosystems and biodiversity.
         </li>
       </ul>
     </section>
 
     <!-- Location Block -->
-    <div class="card p-6 bg-emerald-50 rounded-lg shadow-md">
+    <div class="card p-6 bg-emerald-200 rounded-lg shadow-md">
       <h2 class="text-2xl font-semibold text-gray-800">1. Your Location / Climate Zone</h2>
       <p class="mt-4 text-gray-600">
-        <button id="detect-btn" class="bg-blue-600 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Use My Location</button>
+        <button id="detect-btn" class="bg-green-600 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">Use My Location</button>
         <span class="text-gray-500 mx-4">or enter ZIP:</span>
-        <input id="zip" placeholder="e.g. 90210" class="border border-gray-300 rounded-lg p-2 w-32 focus:border-blue-500 focus:ring-blue-500" />
+        <input id="zip" placeholder="e.g. 90210" class="border border-gray-300 rounded-lg p-2 w-32 focus:border-gray-500 focus:ring-gray-500" />
         <button id="lookup-zip" class="bg-gray-600 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">Lookup</button>
       </p>
       <p id="zone-info" class="mt-4 text-xl font-medium">Zone: <em class="text-red-500 font-bold">unknown</em></p>
       <div id="error-message" class="text-red-500 mt-2 hidden"></div>
-      <p class="text-sm text-gray-500 mt-2">Hardiness zones help determine plants that survive winter lows. <a href="https://planthardiness.ars.usda.gov/" target="_blank" class="text-blue-500 hover:underline">See USDA map</a>.</p>
+      <p class="text-sm text-gray-500 mt-2">Hardiness zones help determine plants that survive winter lows. <a href="https://planthardiness.ars.usda.gov/" target="_blank" class="text-gray-500 hover:underline">See USDA map</a>.</p>
     </div>
 
     <!-- Flowers Block -->
@@ -144,7 +144,7 @@
           <p class="text-sm text-gray-500" id="modal-content"></p>
         </div>
         <div class="items-center px-4 py-3">
-          <button id="close-modal" class="px-4 py-2 bg-blue-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 close-btn">
+          <button id="close-modal" class="px-4 py-2 bg-gray-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 close-btn">
             OK
           </button>
         </div>
@@ -212,13 +212,13 @@
             li.className = 'border-b pb-4';
             let tags = [];
             if (f.pollinator) tags.push('<span class="tag bg-green-200 text-green-800">🐝 Pollinator-Friendly</span>');
-            if (f.native) tags.push('<span class="tag bg-blue-200 text-blue-800">🌎 Native Plant</span>');
+            if (f.native) tags.push('<span class="tag bg-gray-200 text-gray-800">🌎 Native Plant</span>');
             if (f.water === 'low') tags.push('<span class="tag bg-sky-200 text-sky-800">💧 Low Water Needs</span>');
             else if (f.water === 'medium') tags.push('<span class="tag bg-yellow-200 text-yellow-800">💧 Medium Water Needs</span>');
             
             li.innerHTML = `
               <div class="flex items-center space-x-2">
-                <strong class="text-xl text-blue-800">${f.name}</strong>
+                <strong class="text-xl text-gray-800">${f.name}</strong>
                 <span class="text-gray-600">(${f.color})</span>
               </div>
               <p class="mt-1 text-gray-500">${f.notes}</p>
@@ -234,7 +234,7 @@
 
       function setZone(zone) {
         currentZone = zone;
-        document.getElementById('zone-info').innerHTML = `Zone: <em class="text-blue-600 font-bold">${zone}</em>`;
+        document.getElementById('zone-info').innerHTML = `Zone: <em class="text-gray-600 font-bold">${zone}</em>`;
         showFlowers(zone);
         generatePalettes();
         document.getElementById('colors-block').classList.remove('hidden');
@@ -271,9 +271,9 @@
 
       // Generates palettes based on a hardcoded base color
       function generatePalettes() {
-        const comp = ['#2b6cb0', '#e69f00']; // blue/orange
-        const analog = ['#2b6cb0', '#3b8cd1', '#1f54a0']; // blueish analogous
-        const rule = ['#2b6cb0', '#68a0d9', '#f2c14e']; // dominant, secondary, accent
+        const comp = ['#4b5563', '#a3b18a']; // gray/green
+        const analog = ['#4b5563', '#6b7280', '#374151']; // gray analogous
+        const rule = ['#4b5563', '#9ca3af', '#6b7280']; // dominant, secondary, accent
 
         const setSwatches = (id, arr) => {
           const container = document.getElementById(id);
